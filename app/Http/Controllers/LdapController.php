@@ -45,9 +45,17 @@ class LdapController extends Controller
         $t = (array_map(null,$headers));
         // print_r($t[4]);
         if(($t[4] == "Successfully connected.")){
-            echo "<color='red'>".$testPass;
+            // echo "<h4 style='color:#00d82f'>".$testPass. "</h4>";
+
+            return response()->json([
+                "message" => $testPass,
+            ]);
         }else{
-            echo $testFailed;
+            // echo "<h4 style='color:#e60d2a'>" . $testFailed . "</h4>";
+
+            return response()->json([
+                "message" => $testFailed
+            ]);
         }
 
 

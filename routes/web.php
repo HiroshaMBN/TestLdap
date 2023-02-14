@@ -28,9 +28,4 @@ Route::get('Ldap', [LdapController::class, 'TestLdapData'])->name('ldap');
 
 // });
 
-Route::get('ldap-test', function () {
 
-     $k = Artisan::call('config:clear');
-
-    return ($k);
-});
