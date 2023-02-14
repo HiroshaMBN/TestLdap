@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LdapController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,16 @@ Route::get('/', function () {
 
 
 Route::get('Ldap', [LdapController::class, 'TestLdapData'])->name('ldap');
+
+// Route::get('ldap-test', function () {
+//    $b = Artisan::call('ldap:test');
+//     return view($b);
+
+// });
+
+Route::get('ldap-test', function () {
+
+     $k = Artisan::call('config:clear');
+
+    return ($k);
+});

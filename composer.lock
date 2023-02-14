@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eac972acde5dc29ea98e20e135ee39e4",
+    "content-hash": "c6686c91125536a0f961e3d4cd5a7498",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -560,6 +560,104 @@
                 }
             ],
             "time": "2022-09-10T18:51:20+00:00"
+        },
+        {
+            "name": "draw/contracts",
+            "version": "0.9.32",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpoiriert/contracts.git",
+                "reference": "3f486c735792577c5b4ce62efc9061fab124775d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpoiriert/contracts/zipball/3f486c735792577c5b4ce62efc9061fab124775d",
+                "reference": "3f486c735792577c5b4ce62efc9061fab124775d",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.10-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Draw\\Contracts\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A set of abstractions extracted out of the Draw components",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "support": {
+                "issues": "https://github.com/mpoiriert/contracts/issues",
+                "source": "https://github.com/mpoiriert/contracts/tree/0.9.32"
+            },
+            "time": "2023-02-06T22:35:28+00:00"
+        },
+        {
+            "name": "draw/process",
+            "version": "0.9.32",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpoiriert/process.git",
+                "reference": "b09d2608dfecf0e7cc24bdbef79c0fba5e0ea5ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpoiriert/process/zipball/b09d2608dfecf0e7cc24bdbef79c0fba5e0ea5ef",
+                "reference": "b09d2608dfecf0e7cc24bdbef79c0fba5e0ea5ef",
+                "shasum": ""
+            },
+            "require": {
+                "draw/contracts": "^0.9.32",
+                "symfony/process": "^5.4.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0 || ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.10-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Draw\\Component\\Process\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Poirier Theoret",
+                    "email": "mpoiriert@gmail.com"
+                }
+            ],
+            "description": "Package to add some feature related to symfony/process component",
+            "keywords": [
+                "draw",
+                "process",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/mpoiriert/process/issues",
+                "source": "https://github.com/mpoiriert/process/tree/0.9.32"
+            },
+            "time": "2023-02-08T21:38:04+00:00"
         },
         {
             "name": "egulias/email-validator",

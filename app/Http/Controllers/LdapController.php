@@ -4,38 +4,61 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Artisan;
 
 use Illuminate\Http\Request;
+use Psy\Command\Command;
+// use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Process;
 
 class LdapController extends Controller
 {
+    public $t;
+
     //
 
 
 
     public function TestLdapData(){
-        // $val = config('ldap.host'). ':'. config('ldap.port'). '/'. config('');
-        // return "tetst";
-        // $Host = config('ldap.connections.default.hosts');
-        // $userName = config('ldap.connections.default.username');
-        // $DN = config('ldap.connections.default.base_dn');
+         $testPass ="Connection Test Passed";
+         $testFailed ="Connection Test Failed";
+         Artisan::call('ldap:test');
+         $output = Artisan::output();
+        //  echo $output;
+        $lines = explode(PHP_EOL,$output);
 
-        // return view('welcome');
-
-
-
-        // $LdapTest = Artisan::call('ldap:test');
+        $headers = [];
+        $values = [];
 
 
+        foreach ($lines as $line) {
+            if (strpos($line, '|') === 0) {
+                // This is a header row
+                $headers = array_map('trim', explode('|', $line));
+            }
+             else if (strpos($line, '|') !== false) {
+                // This is a data row
+                $data = array_map('trim', explode('|', $line));
+                $values[] = array_combine($headers, $data);
+
+             }
+
+            // }
+        }
+        $t = (array_map(null,$headers));
+        // print_r($t[4]);
+        if(($t[4] == "Successfully connected.")){
+            echo "<color='red'>".$testPass;
+        }else{
+            echo $testFailed;
+        }
 
 
 
-        // $jsonResponse = Artisan::call('ldap:test', [], '--format=json');
-        // return redirect('/'); // Redirect to home page or any other page after executing the command.
-        //    if($c == 'yes'){
-        //         return "LDAP connection successful";
-        //    }else{
-        //         return "LDAP connection failed";
-        //    }
 
+
+        //return view("connection", with(["va"=>$t]));
+        // return view("connection")->with('t',$t);
+
+
+    }
 
     }
 
@@ -44,4 +67,4 @@ class LdapController extends Controller
 
 
 
-}
+
