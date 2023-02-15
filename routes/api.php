@@ -21,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('LdapAPI', [LdapController::class, 'TestLdapData'])->name('LdapAPI');
+
+Route::post('saveCredentials', [LdapController::class, 'saveDataAPI'])->name('saveCredentials');
