@@ -4,6 +4,8 @@ $config = parse_ini_file('data.ini', true);
 $serveURL = $config['LDAP']['ServeURL'];
 $userField = $config['LDAP']['userField'];
 $loginID = $config['LDAP']['LoginID'];
+$DN = $config['LDAP']['DN'];
+$DNArry =(str_replace(':', '=', $DN));
 $password = $config['LDAP']['password'];
 return [
 
@@ -40,7 +42,7 @@ return [
                 'username' => $loginID,
                 'password' => $password,
                 'port' => 389,
-                'base_dn' => 'ou=users,ou=bcts,dc=bluechip,dc=lk',
+                'base_dn' => $DNArry,
                 'timeout' => 5,
                 'use_ssl' => env('LDAP_SSL', false),
                 'use_tls' => env('LDAP_TLS', false),

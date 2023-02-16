@@ -12,7 +12,7 @@ use Symfony\Component\Process\Process;
 
 class LdapController extends Controller
 {
-    public $t;
+    public $t , $DN;
 
     //
 
@@ -40,11 +40,33 @@ class LdapController extends Controller
         $serverURL = $request->input('serverURL');
         $userField = $request->input('userField');
         // $DN = $request->input('DN');
+
+        $DNArry = $request->input('DN');
+        $DN =(str_replace('=', ':', $DNArry));
+
         $LoginID = $request->input('LoginID');
         $password = $request->input('password');
 
-        // Create the contents of the file
-        $contents = "[LDAP]\nServeURL = $serverURL\nuserField = $userField\nLoginID = $LoginID\npassword = $password";
+        // Create the contents of the file(original code)
+        // $contents = "[LDAP]\n
+        // ServeURL = $serverURL\n
+        // userField = $userField\n
+        // LoginID = $LoginID\n
+        // password = $password";
+
+
+        //copied
+        $contents = "[LDAP]
+        ServeURL = $serverURL
+        userField = $userField
+        DN = $DN
+        LoginID = $LoginID
+        password = $password";
+
+
+
+
+
 
         // Save the contents to the file
         $path = public_path('../config/data.ini');
@@ -54,9 +76,11 @@ class LdapController extends Controller
 
             "serveURL" => $serverURL,
             "userField" => $userField,
-            // "DN" => $DN,
+            "DN" => $DN,
             "LoginID" => $LoginID,
             "password" => $password,
+
+            "DN" => $DNArry
 
 
         ]);
