@@ -12,7 +12,7 @@ use Symfony\Component\Process\Process;
 
 class LdapController extends Controller
 {
-    public $t , $DN;
+    public $getTestValues , $DN;
 
     //
 
@@ -139,9 +139,9 @@ class LdapController extends Controller
 
             // }
         }
-        $t = (array_map(null,$headers));
+        $getTestValues = (array_map(null,$headers));
         // print_r($t[4]);
-        if(($t[4] == "Successfully connected.")){
+        if(($getTestValues[4] == "Successfully connected.")){
             return response()->json([
                 "message" => $testPass,
             ]);
