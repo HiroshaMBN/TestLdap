@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('Ldap', [LdapController::class, 'TestLdapData'])->name('ldap');
+Route::get('ldap', [LdapController::class, 'TestLdapData'])->name('ldap');
 
 // Route::get('ldap-test', function () {
 //    $b = Artisan::call('ldap:test');
@@ -28,7 +28,7 @@ Route::get('Ldap', [LdapController::class, 'TestLdapData'])->name('ldap');
 
 // });
 
-// Route::post('/ldap/settings', 'LdapController@updateSettings')->name('ldap.settings.update');
+Route::post('/ldap/settings', 'LdapController@updateSettings')->name('ldap.settings.update');
 
 Route::post('/ldap/settings', [LdapController::class, 'updateSettings'])->name('ldap.settings.update');
 

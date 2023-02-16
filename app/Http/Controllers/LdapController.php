@@ -18,18 +18,18 @@ class LdapController extends Controller
 
     public function updateSettings(Request $request)
     {
-        // Config::set('ldap.hosts', $request->input('hosts'));
-        // Config::set('ldap.username', $request->input('username'));
-        // Config::set('ldap.password', $request->input('password'));
-        // Config::set('ldap.port', $request->input('port'));
-        // Config::set('ldap.base_dn', $request->input('base_dn'));
+        Config::set('ldap.hosts', $request->input('hosts'));
+        Config::set('ldap.username', $request->input('username'));
+        Config::set('ldap.password', $request->input('password'));
+        Config::set('ldap.port', $request->input('port'));
+        Config::set('ldap.base_dn', $request->input('base_dn'));
 
 
-        // if ($request->has('password')) {
-        //     Config::set('ldap.password', $request->input('password'));
-        // }
+        if ($request->has('password')) {
+            Config::set('ldap.password', $request->input('password'));
+        }
         // Redirect to the previous page with a success message
-        // return back()->with('success', 'LDAP settings updated successfully');
+        return back()->with('success', 'LDAP settings updated successfully');
 
 
 
@@ -39,7 +39,7 @@ class LdapController extends Controller
 
         $serverURL = $request->input('serverURL');
         $userField = $request->input('userField');
-        $DN = $request->input('DN');
+        // $DN = $request->input('DN');
         $LoginID = $request->input('LoginID');
         $password = $request->input('password');
 
@@ -54,14 +54,13 @@ class LdapController extends Controller
 
             "serveURL" => $serverURL,
             "userField" => $userField,
-            "DN" => $DN,
+            // "DN" => $DN,
             "LoginID" => $LoginID,
             "password" => $password,
 
 
         ]);
 
-        // echo '<br>URL '.  $serverURL.'<br>USER '. $value2.'<br>UserName '. $value4.'<br>Password '. $value5."\n<br>";
 
 
     }
@@ -150,7 +149,10 @@ class LdapController extends Controller
     public function TestLdapData(){
          $testPass ="Connection Test Passed";
          $testFailed ="Connection Test Failed";
+
+        //execute the php artisan ldap:test command
          Artisan::call('ldap:test');
+         //get it output
          $output = Artisan::output();
         //  echo $output;
         $lines = explode(PHP_EOL,$output);
