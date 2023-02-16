@@ -36,14 +36,15 @@ class LdapController extends Controller
     }
 
     public function saveDataAPI(Request $request){
-
+        //get input values by user
         $serverURL = $request->input('serverURL');
         $userField = $request->input('userField');
-        // $DN = $request->input('DN');
+        $ssl = $request->input('SSL');
 
+        //get dn for array
         $DNArry = $request->input('DN');
+        //seactch = sign and replace : sign
         $DN =(str_replace('=', ':', $DNArry));
-
         $LoginID = $request->input('LoginID');
         $password = $request->input('password');
 
@@ -55,108 +56,72 @@ class LdapController extends Controller
         // password = $password";
 
 
-        //copied
+        //copied code by above
+        //pass to data to data.ini file
         $contents = "[LDAP]
-        ServeURL = $serverURL
-        userField = $userField
-        DN = $DN
-        LoginID = $LoginID
-        password = $password";
-
-
-
-
+            ServeURL = $serverURL
+            userField = $userField
+            DN = $DN
+            SSL = $ssl
+            LoginID = $LoginID
+            password = $password";
 
 
         // Save the contents to the file
         $path = public_path('../config/data.ini');
         File::put($path, $contents);
-
         return response()->json([
-
             "serveURL" => $serverURL,
             "userField" => $userField,
             "DN" => $DN,
             "LoginID" => $LoginID,
             "password" => $password,
-
-            "DN" => $DNArry
-
-
         ]);
-
-
-
     }
 
-
-
-
-
+    // No need this function
+    // This function is called when the user submits the form
     public function saveTxt(Request $request){
         // $name = $request->input('username');
         // $request = Request::capture();
-
-
         // $serverURL = $request->input('serverURL');
         // $userField = $request->input('userField');
         // $DN = $request->input('DN');
         // $LoginID = $request->input('LoginID');
         // $password = $request->input('password');
-
-
     //    $file = File::put(public_path('../config\data.ini'), "[LDAP]\nServeURL => $serverURL\nuserField => $userField\n => $LoginID\npassword => $password");
         //with out DN
-
         // $file = File::put(public_path('../config\data.ini'), "[LDAP]\nServeURL = $serverURL\nuserField = $userField\nLoginID = $LoginID\npassword = $password");
-
         // return redirect()->back();
-
         // Specify the path of the .ini file
-
         // $path = '../config\data.ini';
-
         // Read the contents of the .ini file and parse it
-
         // $config = parse_ini_file($path, true);
-
         // Access the values from the parsed .ini file
-
         // $value = $config['LDAP']['ServeURL'];
         // $value2 = $config['LDAP']['userField'];
         // $value3 = $config['LDAP']['userField'];
         // $value4 = $config['LDAP']['LoginID'];
         // $value5 = $config['LDAP']['password'];
-
-
-
         // echo '<br>URL '.  $value.'<br>USER '. $value2.'<br>UserName '. $value4.'<br>Password '. $value5."\n<br>";
-
-
-
-
-
-
-
-
-
-
         // return view('welcome')->with('value' , $value);
     }
 
-    public function TestLdapData(){
+
+    //This is test bind connection with LDAP server
+    public function TestBind(){
          $testPass ="Connection Test Passed";
          $testFailed ="Connection Test Failed";
 
-        //execute the php artisan ldap:test command
+            //execute the php artisan ldap:test command
          Artisan::call('ldap:test');
-         //get it output
+             //get it output
          $output = Artisan::output();
-        //  echo $output;
-        $lines = explode(PHP_EOL,$output);
+            //  echo $output;
+         $lines = explode(PHP_EOL,$output);
 
-        $headers = [];
-        $values = [];
+         $headers = [];
+         $values = [];
 
 
         foreach ($lines as $line) {
@@ -166,6 +131,7 @@ class LdapController extends Controller
             }
              else if (strpos($line, '|') !== false) {
                 // This is a data row
+                //Data row not readable now
                 $data = array_map('trim', explode('|', $line));
                 $values[] = array_combine($headers, $data);
 
@@ -176,14 +142,10 @@ class LdapController extends Controller
         $t = (array_map(null,$headers));
         // print_r($t[4]);
         if(($t[4] == "Successfully connected.")){
-            // echo "<h4 style='color:#00d82f'>".$testPass. "</h4>";
-
             return response()->json([
                 "message" => $testPass,
             ]);
         }else{
-            // echo "<h4 style='color:#e60d2a'>" . $testFailed . "</h4>";
-
             return response()->json([
                 "message" => $testFailed
             ]);

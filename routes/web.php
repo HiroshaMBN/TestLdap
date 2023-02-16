@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('ldap', [LdapController::class, 'TestLdapData'])->name('ldap');
+Route::get('ldap', [LdapController::class, 'TestBind'])->name('ldap');
 
 // Route::get('ldap-test', function () {
 //    $b = Artisan::call('ldap:test');

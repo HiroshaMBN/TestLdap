@@ -1,5 +1,0 @@
-ServeURL => ldap://10.128.41.32
-userField => sAMAccountName
-DN => ou=users,ou=bcts,dc=bluechip,dc=lk
-LoginID => bluechip\testpm
-password = zaq1@WSX

@@ -1,10 +1,12 @@
 <?php
-
+//pase data.ini file
 $config = parse_ini_file('data.ini', true);
+//getting .ini file values by calling section and key
 $serveURL = $config['LDAP']['ServeURL'];
 $userField = $config['LDAP']['userField'];
 $loginID = $config['LDAP']['LoginID'];
 $DN = $config['LDAP']['DN'];
+//get $DN values and search : and replace them with = sign
 $DNArry =(str_replace(':', '=', $DN));
 $password = $config['LDAP']['password'];
 return [
@@ -37,7 +39,7 @@ return [
     'connections' => [
 
         'default' => [
-
+                // Pass assigned ini values here
                 'hosts' => [$serveURL],
                 'username' => $loginID,
                 'password' => $password,
@@ -66,23 +68,6 @@ return [
         ],
 
     ],
-
-
-
-    // 'hosts' => [env('LDAP_HOST', '10.128.41.32')],
-    // 'username' => env('LDAP_USERNAME', 'bluechip\testpm'),
-    // 'password' => env('LDAP_PASSWORD', 'zaq1@WSX'),
-    // 'port' => env('LDAP_PORT', 389),
-    // 'base_dn' => env('LDAP_BASE_DN', 'ou=users,ou=bcts,dc=bluechip,dc=lk'),
-    // 'timeout' => env('LDAP_TIMEOUT', 5),
-    // 'use_ssl' => env('LDAP_SSL', false),
-    // 'use_tls' => env('LDAP_TLS', false),
-
-
-
-
-
-
     /*
     |--------------------------------------------------------------------------
     | LDAP Logging
